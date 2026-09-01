@@ -15,3 +15,22 @@ h1{font-size:clamp(40px,7vw,78px);line-height:1.02;font-weight:500;max-width:980
 .meta{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:rgba(255,255,255,.45);margin-top:24px}.toc{border:1px solid #e5dfd5;padding:26px;margin-bottom:34px}.toc strong{display:block;margin-bottom:8px}.toc a{color:var(--maroon);text-decoration:none}
 .footer{background:#0a0a0a;color:#fff;padding:60px 0}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}.footer p,.footer a{color:rgba(255,255,255,.5);text-decoration:none}.footer h4{margin-bottom:12px}
 @media(max-width:850px){.links a:not(.cta){display:none}.grid,.footer-grid{grid-template-columns:1fr}.hero{padding:80px 0 64px}.wrap,.nav-inner{padding-left:20px;padding-right:20px}.section{padding:58px 0}h1{font-size:44px}}
+
+/* BOFU decision-stage article enhancements */
+.bofu-hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:46px;align-items:center;position:relative;z-index:2}
+.bofu-hero-grid h1{font-size:clamp(42px,6vw,72px)}.hero-price-card{background:#fff;color:#111;padding:30px;border-top:5px solid var(--gold)}
+.hero-price-card .price-kicker{font-size:11px;text-transform:uppercase;letter-spacing:1.8px;color:var(--maroon);font-weight:700}
+.hero-price-card .price-big{font-size:44px;line-height:1.05;font-weight:700;margin:8px 0}.hero-price-card .price-sub{font-size:15px;color:#666}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.hero-actions .button{margin-top:0}.button.alt{background:transparent;border:1px solid rgba(255,255,255,.28)}
+.bofu-layout{display:grid;grid-template-columns:minmax(0,850px) 260px;gap:55px;align-items:start}.sticky-side{position:sticky;top:100px;border:1px solid #e6e0d7;padding:24px;background:#fff}
+.sticky-side h4{font-size:17px;margin-bottom:10px}.sticky-side p{font-size:14px;color:#666;margin-bottom:14px}.sticky-side .button{width:100%;text-align:center}
+.visual{margin:34px 0}.visual img{width:100%;height:auto;display:block;border:1px solid #e8e1d7}.visual figcaption{font-size:13px;color:#777;margin-top:8px}
+.price-proof{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px 0}.proof-box{border:1px solid #e5dfd5;padding:24px;background:#fff}.proof-box strong{display:block;font-size:27px;line-height:1.1;margin-bottom:8px}.proof-box span{color:#666;font-size:15px}
+.service-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px 0}.service-box{border:1px solid #e6e0d7;padding:24px;background:#fff}.service-box h3{font-size:21px;margin:0 0 8px}.service-box p{font-size:15px;margin:0}
+.table-wrap{overflow-x:auto;margin:28px 0}.decision-table{width:100%;border-collapse:collapse;min-width:720px}.decision-table th,.decision-table td{border:1px solid #e5dfd5;padding:14px 16px;text-align:left;vertical-align:top;font-size:15px}.decision-table th{background:#0a0a0a;color:#fff}.decision-table tr:nth-child(even) td{background:#faf9f7}
+.sample-card{background:#0a0a0a;color:#fff;padding:30px;margin:28px 0}.sample-card h3{margin-top:0;color:#fff}.sample-card p,.sample-card li{color:rgba(255,255,255,.72)}
+.proof-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.proof-item{background:var(--soft);padding:20px;border-top:3px solid var(--gold)}.proof-item strong{display:block;margin-bottom:6px}.proof-item span{font-size:14px;color:#666}
+.local-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:24px 0}.local-grid span{background:#f5f3ef;border:1px solid #e5dfd5;padding:13px 10px;text-align:center;font-size:14px;font-weight:600}
+.faq{border-top:1px solid #e5dfd5}.faq details{border-bottom:1px solid #e5dfd5;padding:18px 0}.faq summary{font-size:18px;font-weight:600;cursor:pointer}.faq p{margin:10px 0 0}
+.inline-cta{border:1px solid #e1dad0;background:#fff;padding:28px;margin:34px 0}.inline-cta h3{margin-top:0}.inline-cta .button{margin-right:8px}
+@media(max-width:900px){.bofu-hero-grid,.bofu-layout{grid-template-columns:1fr}.sticky-side{position:static}.service-grid,.price-proof,.proof-strip{grid-template-columns:1fr}.local-grid{grid-template-columns:repeat(2,1fr)}}
