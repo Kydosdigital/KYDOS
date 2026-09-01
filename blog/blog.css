@@ -34,3 +34,5 @@ h1{font-size:clamp(40px,7vw,78px);line-height:1.02;font-weight:500;max-width:980
 .faq{border-top:1px solid #e5dfd5}.faq details{border-bottom:1px solid #e5dfd5;padding:18px 0}.faq summary{font-size:18px;font-weight:600;cursor:pointer}.faq p{margin:10px 0 0}
 .inline-cta{border:1px solid #e1dad0;background:#fff;padding:28px;margin:34px 0}.inline-cta h3{margin-top:0}.inline-cta .button{margin-right:8px}
 @media(max-width:900px){.bofu-hero-grid,.bofu-layout{grid-template-columns:1fr}.sticky-side{position:static}.service-grid,.price-proof,.proof-strip{grid-template-columns:1fr}.local-grid{grid-template-columns:repeat(2,1fr)}}
+
+.visual svg{width:100%;height:auto;display:block;border:1px solid #e8e1d7}
