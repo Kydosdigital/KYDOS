@@ -961,23 +961,6 @@ a, button, .pkg-card, .addon-card, .why-card, .contact-channel { cursor: pointer
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
-<!-- CURSOR -->
-<div class="cursor-dot" id="cursorDot"></div>
-<div class="cursor-ball" id="cursorBall"></div>
-
-<!-- PRELOADER -->
-<div id="preloader">
-  <div class="pre-words">
-    <p class="pre-word thin" id="pw1">Social</p>
-    <p class="pre-word bold" id="pw2">Media</p>
-    <p class="pre-word thin" id="pw3">Management</p>
-  </div>
-  <div class="pre-brand-wrap">
-    <span class="pre-brand" id="preBrand">kydosdigital.co.uk</span>
-    <div class="pre-reveal-box" id="preReveal"></div>
-  </div>
-</div>
-
 <!-- PROGRESS -->
 <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
 
@@ -996,7 +979,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a href="blog/" class="frame-nav-link">Blog</a>
       </nav>
       <a href="#contact-section" class="nav-get-started"><span class="dot"></span>Get Started</a>
-      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false" aria-controls="menuOverlay"><span></span><span></span><span></span></button>
     </div>
   </div>
   <div class="frame-bottom">
@@ -1083,7 +1066,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <section id="trust-strip" aria-label="Kydos Digital trust information">
-  <div class="container" style="padding-left:48px;padding-right:48px;">
+  <div class="container">
     <div class="trust-grid">
       <div class="trust-item">
         <span class="trust-label">Based in</span>
@@ -1431,8 +1414,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="content-style-copy"><div class="content-style-tag">Service Businesses</div><h3>Founder & Team-Led Brands</h3><p>Expert commentary, personal insight, process content and proof that helps people understand who they are buying from.</p></div>
       </article>
     </div>
+    <!-- CLIENT PROOF UPGRADE SLOT: when approved assets are supplied, add 4 to 6 client logos, 3 attributable testimonials and 2 case studies with a dated baseline, outcome and timeframe. Do not publish unverified metrics. -->
     <div class="content-note mil-up">
-      <p>When client work is approved for public display, this area is also designed to carry client-specific creative, sector examples and performance evidence without changing the page structure.</p>
+      <p>Want to see work closest to your sector? Tell us what you do and we will show the most relevant approved examples during your consultation.</p>
       <a href="#contact-section" class="btn-ghost-dark" data-track="content_styles_consultation">Discuss Your Content</a>
     </div>
   </div>
@@ -1673,7 +1657,7 @@ window.leadConnectorConfig = { disableGtm: true };
 (function () {
   let chatLoaded = false;
   function loadKydosChat() {
-    if (chatLoaded) return;
+    if (chatLoaded || window.innerWidth <= 640) return;
     chatLoaded = true;
     const s = document.createElement('script');
     s.src = 'https://widgets.leadconnectorhq.com/loader.js';
@@ -1696,46 +1680,8 @@ window.leadConnectorConfig = { disableGtm: true };
 
 <!-- JAVASCRIPT -->
 <script>
-/* ─── PRELOADER ─── */
-window.addEventListener('load', () => {
-  const words = [
-    { el: document.getElementById('pw1'), delay: 100 },
-    { el: document.getElementById('pw2'), delay: 350 },
-    { el: document.getElementById('pw3'), delay: 600 },
-  ];
-  words.forEach(({ el, delay }) => setTimeout(() => el.classList.add('visible'), delay));
-  setTimeout(() => {
-    document.getElementById('preBrand').classList.add('visible');
-    setTimeout(() => {
-      document.getElementById('preReveal').classList.add('gone');
-      setTimeout(() => {
-        document.getElementById('preloader').classList.add('hidden');
-        initReveal();
-      }, 900);
-    }, 600);
-  }, 1100);
-});
-
-/* ─── CURSOR ─── */
-const ball = document.getElementById('cursorBall');
-const dot = document.getElementById('cursorDot');
-let mx = 0, my = 0, bx = 0, by = 0;
-if (ball && dot) {
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-  });
-  (function tick() {
-    bx += (mx - bx) * 0.1;
-    by += (my - by) * 0.1;
-    ball.style.left = bx + 'px'; ball.style.top = by + 'px';
-    requestAnimationFrame(tick);
-  })();
-  document.querySelectorAll('a, button, .pkg-card, .addon-card, .why-card, .portfolio-item, .contact-channel').forEach(el => {
-    el.addEventListener('mouseenter', () => { ball.classList.add('expanded'); dot.classList.add('expanded'); });
-    el.addEventListener('mouseleave', () => { ball.classList.remove('expanded'); dot.classList.remove('expanded'); });
-  });
-}
+/* ─── PAGE READY ─── */
+window.addEventListener('load', function () { initReveal(); });
 
 /* ─── HAMBURGER ─── */
 const ham = document.getElementById('hamburger');
@@ -1744,11 +1690,13 @@ let menuOpen = false;
 ham.addEventListener('click', () => {
   menuOpen = !menuOpen;
   ham.classList.toggle('open', menuOpen);
+  ham.setAttribute('aria-expanded', String(menuOpen));
   menuOverlay.classList.toggle('open', menuOpen);
 });
 function closeMenu() {
   menuOpen = false;
   ham.classList.remove('open');
+  ham.setAttribute('aria-expanded', 'false');
   menuOverlay.classList.remove('open');
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen) closeMenu(); });
