@@ -96,3 +96,5 @@ img,svg,video,iframe{max-width:100%}
   .meta{gap:8px 14px}
   .faq summary{font-size:16px;line-height:1.35}
 }
+
+.nav,.hero,.section,.footer{width:100%;max-width:100%}
