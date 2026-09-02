@@ -36,3 +36,63 @@ h1{font-size:clamp(40px,7vw,78px);line-height:1.02;font-weight:500;max-width:980
 @media(max-width:900px){.bofu-hero-grid,.bofu-layout{grid-template-columns:1fr}.sticky-side{position:static}.service-grid,.price-proof,.proof-strip{grid-template-columns:1fr}.local-grid{grid-template-columns:repeat(2,1fr)}}
 
 .visual svg{width:100%;height:auto;display:block;border:1px solid #e8e1d7}
+
+
+/* Mobile-first hardening for BOFU/blog templates */
+html,body{max-width:100%}
+body{overflow-x:clip}
+img,svg,video,iframe{max-width:100%}
+.wrap,.nav-inner,.bofu-layout,.bofu-layout>*,
+.article,.sticky-side,.card,.service-box,.proof-box,.proof-item,
+.inline-cta,.offer,.toc{min-width:0}
+.article{width:100%}
+.article p,.article li,.article h2,.article h3,
+.article a,.sticky-side a,.card a,.toc a,
+.button,th,td{overflow-wrap:break-word;word-break:normal}
+.table-wrap{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-inline:contain}
+.decision-table{max-width:100%}
+.visual{max-width:100%;overflow:hidden}
+.sticky-side .button,.inline-cta .button,.offer .button{max-width:100%;white-space:normal}
+.borough-links-grid,.service-specialist-grid{min-width:0}
+
+@media(max-width:900px){
+  .bofu-hero-grid,.bofu-layout{grid-template-columns:minmax(0,1fr);width:100%;gap:34px}
+  .bofu-hero-grid>*{min-width:0}
+  .sticky-side{width:100%;max-width:100%}
+}
+
+@media(max-width:850px){
+  .nav-inner{width:100%;padding:14px 18px;gap:12px}
+  .logo{min-width:0;flex:0 1 auto}
+  .logo img{height:31px;max-width:145px;object-fit:contain}
+  .links{margin-left:auto;gap:10px;min-width:0}
+  .cta{padding:10px 14px;font-size:12px;white-space:nowrap}
+  .hero{padding:68px 0 54px}
+  .wrap{padding-left:18px;padding-right:18px}
+  .section{padding:52px 0}
+  h1,.bofu-hero-grid h1{font-size:clamp(34px,10vw,44px);line-height:1.06}
+  .hero p{font-size:16px;line-height:1.65}
+  .breadcrumb{margin-bottom:22px}
+  .article h2{font-size:28px;line-height:1.18;margin-top:40px}
+  .article h3{font-size:22px;line-height:1.25}
+  .article p,.article li{font-size:16px;line-height:1.7}
+  .callout,.toc,.inline-cta,.offer,.sample-card{padding:20px}
+  .hero-price-card{padding:22px}
+  .hero-price-card .price-big{font-size:38px}
+  .service-grid,.price-proof,.proof-strip{grid-template-columns:minmax(0,1fr)}
+  .service-box,.proof-box{padding:20px}
+  .sticky-side{padding:20px}
+  .sticky-side .button,.inline-cta .button,.offer .button{display:block;width:100%;text-align:center;padding:13px 14px}
+  .article ul,.article ol{padding-left:20px}
+  .local-grid{grid-template-columns:1fr}
+  .borough-links-grid,.service-specialist-grid{grid-template-columns:1fr!important}
+}
+
+@media(max-width:600px){
+  .decision-table{min-width:0;table-layout:fixed}
+  .decision-table th,.decision-table td{padding:11px 10px;font-size:13px;line-height:1.45;overflow-wrap:anywhere}
+  .decision-table th:first-child,.decision-table td:first-child{width:32%}
+  .decision-table:has(th:nth-child(3)){min-width:620px;table-layout:auto}
+  .meta{gap:8px 14px}
+  .faq summary{font-size:16px;line-height:1.35}
+}
