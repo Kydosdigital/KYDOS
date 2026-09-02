@@ -45,3 +45,6 @@ a{color:inherit} img{max-width:100%}
 .inline-links a{border:1px solid var(--line);padding:10px 13px;text-decoration:none;font-size:13px;font-weight:600;background:#fff}
 .inline-links a:hover{border-color:var(--maroon);color:var(--maroon)}
 @media(max-width:900px){.scope-grid{grid-template-columns:1fr}.decision-table{font-size:14px}}
+
+.breadcrumb{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:18px;font-size:13px;color:rgba(255,255,255,.7)}
+.breadcrumb a{color:inherit;text-decoration:none}.breadcrumb a:hover{color:#fff}.breadcrumb span[aria-current="page"]{color:#fff;font-weight:600}
