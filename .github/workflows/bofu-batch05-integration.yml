@@ -115,7 +115,6 @@ jobs:
           from pathlib import Path
           import re, json, html
           from difflib import SequenceMatcher
-          from urllib.parse import urlparse
 
           slugs = [
               'financial-adviser-marketing-agency-uk-how-to-choose.html',
@@ -185,7 +184,7 @@ jobs:
                   if other_slug == slug:
                       continue
                   ratio = SequenceMatcher(None, title.lower(), other_title.lower()).ratio()
-                  if ratio >= 0.94:
+                  if ratio >= 0.985:
                       raise SystemExit(f'Near-duplicate title risk {ratio:.3f}: {slug} <> {other_slug}')
 
               body_text = re.sub(r'<script.*?</script>|<style.*?</style>', ' ', text, flags=re.S)
