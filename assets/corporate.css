@@ -200,3 +200,14 @@ a{color:inherit}
 .kd-career-card{border:1px solid var(--kd-line);border-radius:var(--kd-radius);padding:30px;background:#fff}
 .kd-career-card h3{font-size:1.4rem;margin:0 0 10px}
 .kd-career-card p{color:var(--kd-grey);line-height:1.7}
+
+.kd-team-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.kd-team-card{border:1px solid var(--kd-line);border-radius:var(--kd-radius);background:#fff;overflow:hidden}
+.kd-team-avatar{aspect-ratio:1/1;display:flex;align-items:flex-end;padding:24px;background:linear-gradient(135deg,#101010 0%,#191919 54%,#790000 100%);color:#fff;font-size:clamp(3.5rem,7vw,6.5rem);font-weight:600;letter-spacing:-.06em}
+.kd-team-body{padding:24px}
+.kd-team-body h3{font-size:1.35rem;margin:0 0 6px}
+.kd-team-role{font-size:.84rem;letter-spacing:.08em;text-transform:uppercase;color:var(--kd-red);font-weight:700}
+.kd-team-body p{color:var(--kd-grey);line-height:1.65;margin:14px 0 0}
+.kd-team-note{margin-top:24px;padding:20px 22px;border:1px solid var(--kd-line);background:var(--kd-paper);font-size:.92rem;line-height:1.65;color:#666;border-radius:14px}
+@media(max-width:980px){.kd-team-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.kd-team-grid{grid-template-columns:1fr}}
