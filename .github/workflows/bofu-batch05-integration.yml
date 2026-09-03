@@ -1,0 +1,264 @@
+name: BOFU Batch 05 Integration QA
+
+on:
+  push:
+    branches:
+      - seo/bofu-batch05-rebased-2026-09-03
+
+permissions:
+  contents: write
+
+jobs:
+  integrate-and-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: seo/bofu-batch05-rebased-2026-09-03
+          fetch-depth: 0
+
+      - name: Integrate hub, sitemap and technical metadata
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re, html
+
+          slugs = [
+              'financial-adviser-marketing-agency-uk-how-to-choose.html',
+              'consultant-marketing-agency-uk-how-to-choose.html',
+              'builder-marketing-agency-uk-how-to-choose.html',
+              'roofing-marketing-agency-uk-how-to-choose.html',
+              'plumbing-heating-marketing-agency-uk-how-to-choose.html',
+              'electrician-marketing-agency-uk-how-to-choose.html',
+              'kitchen-bathroom-marketing-agency-uk-how-to-choose.html',
+              'landscaping-marketing-agency-uk-how-to-choose.html',
+              'venue-marketing-agency-uk-how-to-choose.html',
+              'catering-marketing-agency-uk-how-to-choose.html',
+          ]
+
+          cards = [
+              ('Financial Adviser Marketing Agency UK: How to Choose', 'financial-adviser-marketing-agency-uk-how-to-choose.html', 'Compare providers on regulated-content workflows, lead quality, implementation responsibility, ownership and contract fit.'),
+              ('Consultant Marketing Agency UK: How to Choose', 'consultant-marketing-agency-uk-how-to-choose.html', 'Compare agencies on positioning, expertise extraction, B2B lead quality, implementation, ownership and commercial fit.'),
+              ('Builder Marketing Agency UK: How to Choose', 'builder-marketing-agency-uk-how-to-choose.html', 'Compare providers around project value, service area, local demand, lead qualification, tracking and sales handover.'),
+              ('Roofing Marketing Agency UK: How to Choose', 'roofing-marketing-agency-uk-how-to-choose.html', 'Compare agencies around emergency and planned demand, service radius, lead quality, tracking and implementation.'),
+              ('Plumbing & Heating Marketing Agency UK: How to Choose', 'plumbing-heating-marketing-agency-uk-how-to-choose.html', 'Compare providers around urgent and planned jobs, profitable geography, calls, lead quality, ownership and scope.'),
+              ('Electrician Marketing Agency UK: How to Choose', 'electrician-marketing-agency-uk-how-to-choose.html', 'Compare agencies around domestic and commercial work, service radius, lead qualification, tracking and responsibility.'),
+              ('Kitchen & Bathroom Marketing Agency UK: How to Choose', 'kitchen-bathroom-marketing-agency-uk-how-to-choose.html', 'Compare agencies on showroom and consultation journeys, visual proof, project value, tracking, ownership and scope.'),
+              ('Landscaping Marketing Agency UK: How to Choose', 'landscaping-marketing-agency-uk-how-to-choose.html', 'Compare providers around seasonality, service mix, geography, project value, lead quality and campaign control.'),
+              ('Venue Marketing Agency UK: How to Choose', 'venue-marketing-agency-uk-how-to-choose.html', 'Compare agencies around event mix, booking windows, viewings, capacity, date utilisation, tracking and ownership.'),
+              ('Catering Marketing Agency UK: How to Choose', 'catering-marketing-agency-uk-how-to-choose.html', 'Compare providers around event type, capacity, geography, qualification, repeat corporate value and ownership.'),
+          ]
+
+          hub = Path('blog/index.html')
+          hub_text = hub.read_text(encoding='utf-8')
+          marker = '<section class="section"><div class="wrap"><div class="article"><h2 style="margin-top:0">How this library is being built</h2>'
+          if marker not in hub_text:
+              raise SystemExit('Blog hub insertion marker not found')
+          if not all(slug in hub_text for slug in slugs):
+              card_html = ''.join(
+                  f'<article class="card"><div class="tag">UK sector buyer guide</div><h3>{title}</h3><p>{desc}</p><a class="read" href="{slug}">Compare providers →</a></article>'
+                  for title, slug, desc in cards
+              )
+              section = (
+                  '<section class="section"><div class="wrap"><div class="eyebrow" style="color:#800000">UK sector buyer guides · Batch 05</div>'
+                  '<h2 style="font-size:42px;margin-bottom:12px">More specialist agency shortlists for buyers ready to hire.</h2>'
+                  '<p style="max-width:820px;color:#666;margin-bottom:30px">Ten decision-stage guides across financial advice, consulting, trades, home improvement, landscaping, venues and catering, each focused on provider fit, delivery responsibility, ownership and commercial scope.</p>'
+                  f'<div class="grid">{card_html}</div></div></section>\n'
+              )
+              hub_text = hub_text.replace(marker, section + marker, 1)
+              hub.write_text(hub_text, encoding='utf-8')
+
+          sitemap = Path('sitemap.xml')
+          sitemap_text = sitemap.read_text(encoding='utf-8')
+          missing = [s for s in slugs if f'/blog/{s}' not in sitemap_text]
+          if missing:
+              entries = ''.join(
+                  f'<url><loc>https://www.kydosdigital.com/blog/{slug}</loc><lastmod>2026-09-03</lastmod></url>\n'
+                  for slug in missing
+              )
+              sitemap_text = sitemap_text.replace('</urlset>', entries + '</urlset>', 1)
+              sitemap.write_text(sitemap_text, encoding='utf-8')
+
+          for slug in slugs:
+              path = Path('blog') / slug
+              text = path.read_text(encoding='utf-8')
+              title_m = re.search(r'<title>(.*?)</title>', text, re.S)
+              desc_m = re.search(r'<meta name="description" content="([^"]*)">', text)
+              canon_m = re.search(r'<link rel="canonical" href="([^"]+)">', text)
+              if not (title_m and desc_m and canon_m):
+                  raise SystemExit(f'Missing title, description or canonical in {slug}')
+              title = html.unescape(title_m.group(1)).strip()
+              desc = html.unescape(desc_m.group(1)).strip()
+              canonical = canon_m.group(1)
+              if '<meta name="robots"' not in text:
+                  insert = (
+                      '<meta name="robots" content="index,follow">'
+                      f'<meta property="og:title" content="{html.escape(title, quote=True)}">'
+                      f'<meta property="og:description" content="{html.escape(desc, quote=True)}">'
+                      f'<meta property="og:url" content="{html.escape(canonical, quote=True)}">'
+                      '<meta property="og:type" content="article">'
+                  )
+                  text = text.replace(canon_m.group(0), canon_m.group(0) + insert, 1)
+              else:
+                  required_og = ['og:title', 'og:description', 'og:url', 'og:type']
+                  if not all(f'property="{p}"' in text for p in required_og):
+                      raise SystemExit(f'Incomplete Open Graph metadata in {slug}')
+              path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Run duplicate, schema, canonical, hub, sitemap and link QA
+        shell: bash
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re, json, html
+          from difflib import SequenceMatcher
+          from urllib.parse import urlparse
+
+          slugs = [
+              'financial-adviser-marketing-agency-uk-how-to-choose.html',
+              'consultant-marketing-agency-uk-how-to-choose.html',
+              'builder-marketing-agency-uk-how-to-choose.html',
+              'roofing-marketing-agency-uk-how-to-choose.html',
+              'plumbing-heating-marketing-agency-uk-how-to-choose.html',
+              'electrician-marketing-agency-uk-how-to-choose.html',
+              'kitchen-bathroom-marketing-agency-uk-how-to-choose.html',
+              'landscaping-marketing-agency-uk-how-to-choose.html',
+              'venue-marketing-agency-uk-how-to-choose.html',
+              'catering-marketing-agency-uk-how-to-choose.html',
+          ]
+          hub = Path('blog/index.html').read_text(encoding='utf-8')
+          sitemap = Path('sitemap.xml').read_text(encoding='utf-8')
+          locs = re.findall(r'<loc>(.*?)</loc>', sitemap)
+          if len(locs) != len(set(locs)):
+              from collections import Counter
+              dupes = [u for u,c in Counter(locs).items() if c > 1]
+              raise SystemExit(f'Duplicate sitemap URLs: {dupes}')
+
+          all_titles = {}
+          for p in Path('blog').glob('*.html'):
+              t = p.read_text(encoding='utf-8', errors='ignore')
+              m = re.search(r'<title>(.*?)</title>', t, re.S)
+              if m:
+                  all_titles[p.name] = html.unescape(re.sub(r'\s+', ' ', m.group(1))).strip()
+
+          seen_target_titles = set()
+          for slug in slugs:
+              p = Path('blog') / slug
+              text = p.read_text(encoding='utf-8')
+              canonical = f'https://www.kydosdigital.com/blog/{slug}'
+              assert text.count('<h1') == 1, f'H1 count failed: {slug}'
+              assert text.count(f'<link rel="canonical" href="{canonical}">') == 1, f'Canonical failed: {slug}'
+              assert '<meta name="robots" content="index,follow">' in text, f'Robots failed: {slug}'
+              for og in ('og:title','og:description','og:url','og:type'):
+                  assert f'property="{og}"' in text, f'OG metadata failed {og}: {slug}'
+              for schema_type in ('BlogPosting','BreadcrumbList','FAQPage'):
+                  assert f'"@type":"{schema_type}"' in text, f'Schema failed {schema_type}: {slug}'
+              assert '"publisher"' in text and '"author"' in text, f'BlogPosting author/publisher failed: {slug}'
+              summaries = [html.unescape(x).strip() for x in re.findall(r'<summary>(.*?)</summary>', text, re.S)]
+              assert len(summaries) >= 6, f'Visible FAQ count failed: {slug}'
+              scripts = re.findall(r'<script type="application/ld\+json">(.*?)</script>', text, re.S)
+              data = None
+              for raw in scripts:
+                  try:
+                      obj = json.loads(raw)
+                  except Exception:
+                      continue
+                  if isinstance(obj, dict) and '@graph' in obj:
+                      data = obj
+                      break
+              assert data, f'JSON-LD parse failed: {slug}'
+              faq = next((x for x in data['@graph'] if x.get('@type') == 'FAQPage'), None)
+              assert faq, f'FAQPage object missing: {slug}'
+              qnames = [q.get('name','').strip() for q in faq.get('mainEntity',[])]
+              assert summaries == qnames, f'FAQ schema wording mismatch: {slug}'
+              assert hub.count(slug) == 1, f'Blog hub inclusion failed: {slug}'
+              assert sitemap.count(canonical) == 1, f'Sitemap inclusion failed: {slug}'
+              assert 'lang="en-GB"' in text, f'en-GB failed: {slug}'
+
+              title = all_titles[slug]
+              assert title not in seen_target_titles, f'Duplicate target title: {title}'
+              seen_target_titles.add(title)
+              for other_slug, other_title in all_titles.items():
+                  if other_slug == slug:
+                      continue
+                  ratio = SequenceMatcher(None, title.lower(), other_title.lower()).ratio()
+                  if ratio >= 0.94:
+                      raise SystemExit(f'Near-duplicate title risk {ratio:.3f}: {slug} <> {other_slug}')
+
+              body_text = re.sub(r'<script.*?</script>|<style.*?</style>', ' ', text, flags=re.S)
+              body_text = re.sub(r'<[^>]+>', ' ', body_text)
+              words = re.findall(r"\b[\w’'-]+\b", html.unescape(body_text))
+              assert len(words) >= 650, f'Word-depth sense check failed ({len(words)}): {slug}'
+
+              for href in re.findall(r'href="([^"]+)"', text):
+                  if href.startswith(('http://','https://','mailto:','tel:','#')) or href in ('./','../'):
+                      continue
+                  target = (p.parent / href).resolve()
+                  repo = Path('.').resolve()
+                  if str(target).startswith(str(repo)) and not target.exists():
+                      raise SystemExit(f'Broken internal link in {slug}: {href}')
+
+          print(f'QA PASS: {len(slugs)} articles, {len(locs)} unique sitemap URLs')
+          PY
+
+      - name: Run rendered mobile QA at 390px and 430px
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$CHROME" ]; then
+            echo "No Chrome or Chromium available on runner"
+            exit 1
+          fi
+          rm -rf /tmp/kydos-mobile-qa
+          mkdir -p /tmp/kydos-mobile-qa
+          cp -a . /tmp/kydos-mobile-qa/site
+          python3 <<'PY'
+          from pathlib import Path
+          slugs = [
+              'financial-adviser-marketing-agency-uk-how-to-choose.html','consultant-marketing-agency-uk-how-to-choose.html','builder-marketing-agency-uk-how-to-choose.html','roofing-marketing-agency-uk-how-to-choose.html','plumbing-heating-marketing-agency-uk-how-to-choose.html','electrician-marketing-agency-uk-how-to-choose.html','kitchen-bathroom-marketing-agency-uk-how-to-choose.html','landscaping-marketing-agency-uk-how-to-choose.html','venue-marketing-agency-uk-how-to-choose.html','catering-marketing-agency-uk-how-to-choose.html'
+          ]
+          script = '''<script>window.addEventListener('load',function(){setTimeout(function(){var d=document.documentElement,b=document.body,v=d.clientWidth,s=d.scrollWidth;function inside(el){if(!el)return true;var r=el.getBoundingClientRect();return r.left>=-1&&r.right<=v+1;}var nav=inside(document.querySelector('.nav'));var h1=inside(document.querySelector('h1'));var wraps=[].slice.call(document.querySelectorAll('.table-wrap')).every(inside);var ctas=[].slice.call(document.querySelectorAll('a.button,a.read,.inline-cta')).every(inside);b.setAttribute('data-qa-width',String(v));b.setAttribute('data-qa-scroll',String(s));b.setAttribute('data-qa-doc',s<=v+1?'pass':'fail');b.setAttribute('data-qa-nav',nav?'pass':'fail');b.setAttribute('data-qa-h1',h1?'pass':'fail');b.setAttribute('data-qa-tables',wraps?'pass':'fail');b.setAttribute('data-qa-ctas',ctas?'pass':'fail');},200);});</script>'''
+          root=Path('/tmp/kydos-mobile-qa/site/blog')
+          for slug in slugs:
+              p=root/slug
+              t=p.read_text(encoding='utf-8')
+              t=t.replace('</body>',script+'</body>',1)
+              p.write_text(t,encoding='utf-8')
+          PY
+          cd /tmp/kydos-mobile-qa/site
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/kydos-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 1
+          slugs=(financial-adviser-marketing-agency-uk-how-to-choose.html consultant-marketing-agency-uk-how-to-choose.html builder-marketing-agency-uk-how-to-choose.html roofing-marketing-agency-uk-how-to-choose.html plumbing-heating-marketing-agency-uk-how-to-choose.html electrician-marketing-agency-uk-how-to-choose.html kitchen-bathroom-marketing-agency-uk-how-to-choose.html landscaping-marketing-agency-uk-how-to-choose.html venue-marketing-agency-uk-how-to-choose.html catering-marketing-agency-uk-how-to-choose.html)
+          for width in 390 430; do
+            for slug in "${slugs[@]}"; do
+              out="/tmp/${width}-${slug}.dom"
+              "$CHROME" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --window-size="${width},900" --virtual-time-budget=1800 --dump-dom "http://127.0.0.1:8765/blog/$slug" > "$out"
+              grep -q 'data-qa-doc="pass"' "$out" || { echo "Document overflow failed: $slug @ ${width}px"; grep -o 'data-qa-[^>]*' "$out" | head -1; exit 1; }
+              grep -q 'data-qa-nav="pass"' "$out" || { echo "Navigation failed: $slug @ ${width}px"; exit 1; }
+              grep -q 'data-qa-h1="pass"' "$out" || { echo "H1 wrapping failed: $slug @ ${width}px"; exit 1; }
+              grep -q 'data-qa-tables="pass"' "$out" || { echo "Table container failed: $slug @ ${width}px"; exit 1; }
+              grep -q 'data-qa-ctas="pass"' "$out" || { echo "CTA wrapping failed: $slug @ ${width}px"; exit 1; }
+            done
+          done
+          echo "MOBILE QA PASS: all 10 BOFU guides at 390px and 430px"
+
+      - name: Commit integrated batch and remove one-shot workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/bofu-batch05-integration.yml
+          git config user.name "Kydos Digital"
+          git config user.email "kydosdigital@gmail.com"
+          git add blog/index.html sitemap.xml blog/*.html .github/workflows/bofu-batch05-integration.yml
+          if git diff --cached --quiet; then
+            echo "No repository changes to commit"
+            exit 0
+          fi
+          git commit -m "Integrate BOFU batch 05 and pass Gold QA"
+          git push origin HEAD:seo/bofu-batch05-rebased-2026-09-03
