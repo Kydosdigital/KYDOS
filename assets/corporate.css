@@ -184,3 +184,19 @@ a{color:inherit}
 .kd-client-logo{background:#fff;min-height:108px;display:flex;align-items:center;justify-content:center;padding:18px}
 .kd-client-logo img{max-width:170px;max-height:68px;object-fit:contain;width:auto;height:auto}
 .kd-client-logo.wide img{max-width:190px}
+
+.kd-case-brand{display:flex;align-items:center;justify-content:center;min-height:150px;padding:26px;border:1px solid var(--kd-line);border-radius:var(--kd-radius);background:#fff}
+.kd-case-brand img{max-width:250px;max-height:95px;object-fit:contain}
+.kd-longform{max-width:860px;margin:0 auto}
+.kd-longform h2{font-size:clamp(2rem,4vw,3.8rem);margin-top:64px}
+.kd-longform h3{font-size:1.45rem;margin-top:34px}
+.kd-longform p{font-size:1.06rem;line-height:1.78;color:#4f4f4f}
+.kd-longform ul,.kd-longform ol{padding-left:24px;color:#4f4f4f;line-height:1.75}
+.kd-longform li{margin:7px 0}
+.kd-longform table{width:100%;border-collapse:collapse;margin:26px 0;font-size:.95rem}
+.kd-longform th{background:#171717;color:#fff;text-align:left;padding:14px}
+.kd-longform td{padding:14px;border-bottom:1px solid var(--kd-line);vertical-align:top}
+.kd-longform blockquote{margin:34px 0;padding:24px 28px;border-left:4px solid var(--kd-red);background:var(--kd-paper);font-size:1.25rem;line-height:1.5}
+.kd-career-card{border:1px solid var(--kd-line);border-radius:var(--kd-radius);padding:30px;background:#fff}
+.kd-career-card h3{font-size:1.4rem;margin:0 0 10px}
+.kd-career-card p{color:var(--kd-grey);line-height:1.7}
