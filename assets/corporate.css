@@ -180,3 +180,7 @@ a{color:inherit}
   .kd-form-shell{padding:10px}
   .kd-form-shell iframe{min-height:820px}
 }
+
+.kd-client-logo{background:#fff;min-height:108px;display:flex;align-items:center;justify-content:center;padding:18px}
+.kd-client-logo img{max-width:170px;max-height:68px;object-fit:contain;width:auto;height:auto}
+.kd-client-logo.wide img{max-width:190px}
