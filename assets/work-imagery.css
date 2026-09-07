@@ -1,0 +1,44 @@
+/* Real project imagery for the Work portfolio. No AI-generated images. */
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work.html"]) .kd-section:not(.dark) .kd-grid-3 > .kd-work-card .kd-work-visual{
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work.html"]) .kd-section:not(.dark) .kd-grid-3 > .kd-work-card:nth-child(1) .kd-work-visual{
+  background-image:linear-gradient(180deg,rgba(5,5,5,.12),rgba(5,5,5,.80)),var(--kd-photo-citywide);
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work.html"]) .kd-section:not(.dark) .kd-grid-3 > .kd-work-card:nth-child(2) .kd-work-visual{
+  background-image:linear-gradient(180deg,rgba(5,5,5,.10),rgba(37,18,0,.79)),var(--kd-photo-ewa);
+  background-position:center 35%;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work.html"]) .kd-section:not(.dark) .kd-grid-3 > .kd-work-card:nth-child(3) .kd-work-visual{
+  background-image:linear-gradient(180deg,rgba(5,5,5,.08),rgba(5,5,5,.77)),url('https://physio-matters.org/wp-content/uploads/2025/11/P1155779-scaled.jpg');
+  background-position:center 34%;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work.html"]) .kd-section:not(.dark) .kd-grid-3 > .kd-work-card:nth-child(4) .kd-work-visual{
+  background-image:linear-gradient(180deg,rgba(5,5,5,.08),rgba(5,5,5,.79)),var(--kd-photo-bhi);
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work.html"]) .kd-section:not(.dark) .kd-grid-3 > .kd-work-card:nth-child(5) .kd-work-visual{
+  background-image:linear-gradient(180deg,rgba(10,10,10,.18),rgba(10,10,10,.82)),url('/assets/client/lifeline-company-logo.jpg');
+  background-size:cover,76% auto;
+  background-repeat:no-repeat;
+  background-position:center,center;
+  background-color:#f5f1eb;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work.html"]) .kd-section:not(.dark) .kd-grid-3 > .kd-work-card:nth-child(6) .kd-work-visual{
+  background-image:linear-gradient(180deg,rgba(10,10,10,.14),rgba(10,10,10,.80)),url('/assets/client/renewcap-uk-logo.png');
+  background-size:cover,72% auto;
+  background-repeat:no-repeat;
+  background-position:center,center;
+  background-color:#f8f4ec;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work.html"]) .kd-section:not(.dark) .kd-grid-3 > .kd-work-card:nth-child(7) .kd-work-visual{
+  background-image:linear-gradient(180deg,rgba(5,5,5,.10),rgba(5,5,5,.80)),url('https://www.hpponline.co.uk/UserFiles/Image/Careers/Join_Our_Team3.webp');
+  background-position:center 42%;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work.html"]) .kd-work-visual.paper .project-label,
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work.html"]) .kd-work-visual.gold .project-label{color:#fff}
+
+@media(max-width:680px){
+  html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work.html"]) .kd-section:not(.dark) .kd-grid-3 > .kd-work-card .kd-work-visual{min-height:220px}
+}
