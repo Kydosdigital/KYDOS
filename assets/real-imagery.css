@@ -1,0 +1,205 @@
+/* Kydos real-imagery layer, September 2026.
+   Policy: real client/project imagery and licensed photography only. No AI-generated imagery. */
+
+:root{
+  --kd-photo-team:url('https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?auto=format&fit=crop&fm=jpg&q=78&w=2400');
+  --kd-photo-dashboard:url('https://images.unsplash.com/photo-1771923082503-0a3381c46cef?auto=format&fit=crop&fm=jpg&q=78&w=2400');
+  --kd-photo-workspace:url('https://images.unsplash.com/photo-1781914476939-91a41b914899?auto=format&fit=crop&fm=jpg&q=78&w=2400');
+  --kd-photo-ewa:url('https://ethicalwealth.academy/images/hero2.jpg');
+  --kd-photo-citywide:url('https://drive.google.com/thumbnail?id=1O1l86fZp7UgQErQDUY8hzFGGzNCmMD80&sz=w1600');
+  --kd-photo-bhi:url('https://drive.google.com/thumbnail?id=1ea1WPXcaUcdzqmYg_R_XaqfsgG93MTWb&sz=w1600');
+}
+
+/* Global corporate hero: real photography beneath the existing Kydos red/black treatment. */
+.kd-hero{
+  isolation:isolate;
+  background-image:
+    radial-gradient(circle at 84% 24%,rgba(143,0,0,.58),transparent 38%),
+    linear-gradient(90deg,rgba(7,7,7,.95) 0%,rgba(7,7,7,.84) 47%,rgba(25,0,0,.67) 100%),
+    var(--kd-photo-team);
+  background-size:auto,auto,cover;
+  background-position:center,center,center 42%;
+  background-repeat:no-repeat;
+}
+.kd-hero:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.26));
+  pointer-events:none;
+}
+.kd-hero > .kd-container{position:relative;z-index:2}
+
+/* Give core corporate pages distinct, but consistent, real photography. */
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/about.html"]) .kd-hero,
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/careers.html"]) .kd-hero{
+  background-image:
+    radial-gradient(circle at 84% 24%,rgba(143,0,0,.50),transparent 38%),
+    linear-gradient(90deg,rgba(7,7,7,.95) 0%,rgba(7,7,7,.80) 52%,rgba(25,0,0,.62) 100%),
+    var(--kd-photo-team);
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work.html"]) .kd-hero{
+  background-image:
+    radial-gradient(circle at 84% 24%,rgba(143,0,0,.48),transparent 38%),
+    linear-gradient(90deg,rgba(7,7,7,.95) 0%,rgba(7,7,7,.78) 48%,rgba(25,0,0,.60) 100%),
+    var(--kd-photo-ewa);
+  background-position:center,center,center 38%;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/services.html"]) .kd-hero,
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/analytics-reporting.html"]) .kd-hero,
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/crm-automation.html"]) .kd-hero,
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/web.html"]) .kd-hero{
+  background-image:
+    radial-gradient(circle at 84% 24%,rgba(143,0,0,.55),transparent 38%),
+    linear-gradient(90deg,rgba(7,7,7,.96) 0%,rgba(7,7,7,.82) 52%,rgba(25,0,0,.66) 100%),
+    var(--kd-photo-dashboard);
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/insights.html"]) .kd-hero,
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/pricing.html"]) .kd-hero,
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/team.html"]) .kd-hero{
+  background-image:
+    radial-gradient(circle at 84% 24%,rgba(143,0,0,.50),transparent 38%),
+    linear-gradient(90deg,rgba(7,7,7,.96) 0%,rgba(7,7,7,.83) 52%,rgba(25,0,0,.62) 100%),
+    var(--kd-photo-workspace);
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/social-media.html"]) .kd-hero{
+  background-image:
+    radial-gradient(circle at 84% 24%,rgba(143,0,0,.52),transparent 38%),
+    linear-gradient(90deg,rgba(7,7,7,.95) 0%,rgba(7,7,7,.80) 52%,rgba(25,0,0,.64) 100%),
+    var(--kd-photo-team);
+}
+
+/* Homepage client strip: use the current official Citywide text mark and official EWA mark. */
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/"]) .kd-client-strip > :nth-child(1),
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/about.html"]) .kd-client-strip > :nth-child(1){
+  font-size:0;
+  gap:10px;
+  flex-direction:row;
+  color:#111;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/"]) .kd-client-strip > :nth-child(1)::before,
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/about.html"]) .kd-client-strip > :nth-child(1)::before{
+  content:"CH";
+  font-size:2rem;
+  line-height:1;
+  font-weight:700;
+  letter-spacing:-.08em;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/"]) .kd-client-strip > :nth-child(1)::after,
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/about.html"]) .kd-client-strip > :nth-child(1)::after{
+  content:"Citywide\A Housing";
+  white-space:pre;
+  text-align:left;
+  font-size:.96rem;
+  line-height:1.05;
+  font-weight:650;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/"]) .kd-client-strip > :nth-child(2),
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/about.html"]) .kd-client-strip > :nth-child(2){
+  font-size:0;
+  background:#fff url('https://storage.googleapis.com/msgsndr/f2l3amqDv38OyQmhRZ8X/media/68ade2659f32d817a4244b27.png') center/118px auto no-repeat;
+}
+
+/* The source Lifeline artwork contains generous whitespace. Compensate optically in the logo tile. */
+.kd-client-strip > :nth-child(4){overflow:hidden}
+.kd-client-strip > :nth-child(4) img{
+  transform:scale(1.48);
+  transform-origin:center;
+  max-height:86px;
+  max-width:220px;
+}
+
+/* Homepage selected work now shows genuine client/project context rather than generic colour blocks. */
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/"]) .kd-grid-3 > .kd-work-card:nth-child(1) .kd-work-visual{
+  background-image:linear-gradient(180deg,rgba(8,8,8,.14),rgba(8,8,8,.78)),var(--kd-photo-citywide);
+  background-size:cover;
+  background-position:center;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/"]) .kd-grid-3 > .kd-work-card:nth-child(2) .kd-work-visual{
+  background-image:linear-gradient(180deg,rgba(20,8,0,.14),rgba(20,8,0,.76)),var(--kd-photo-ewa);
+  background-size:cover;
+  background-position:center 35%;
+  color:#fff;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/"]) .kd-grid-3 > .kd-work-card:nth-child(3) .kd-work-visual{
+  background-image:linear-gradient(180deg,rgba(8,8,8,.08),rgba(8,8,8,.78)),var(--kd-photo-dashboard);
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/"]) .kd-work-visual:before{opacity:.42}
+
+/* Wider capability: real dashboard photography with the Kydos gradient, text and cards stay dominant. */
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/"]) .kd-section.dark:has(.kd-eyebrow.light){
+  position:relative;
+  isolation:isolate;
+  background-image:
+    linear-gradient(90deg,rgba(8,8,8,.96) 0%,rgba(8,8,8,.88) 48%,rgba(62,0,0,.72) 100%),
+    var(--kd-photo-dashboard);
+  background-size:cover;
+  background-position:center;
+  background-attachment:scroll;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/"]) .kd-section.dark:has(.kd-eyebrow.light) > .kd-container{position:relative;z-index:2}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/"]) .kd-section.dark:has(.kd-eyebrow.light) .kd-card.dark{
+  background:rgba(20,20,20,.76);
+  backdrop-filter:blur(12px);
+  border-color:rgba(255,255,255,.16);
+}
+
+/* Case-study heroes: real client/project imagery stays deliberately faint behind the copy. */
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work/citywide-housing/"]) .kd-case-hero{
+  background-image:linear-gradient(90deg,rgba(247,244,239,.97) 0%,rgba(247,244,239,.91) 62%,rgba(247,244,239,.72) 100%),var(--kd-photo-citywide);
+  background-size:cover;
+  background-position:center;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work/ethical-wealth-academy/"]) .kd-case-hero{
+  background-image:linear-gradient(90deg,rgba(247,244,239,.97) 0%,rgba(247,244,239,.90) 60%,rgba(247,244,239,.68) 100%),var(--kd-photo-ewa);
+  background-size:cover;
+  background-position:center 36%;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work/black-health-initiative/"]) .kd-case-hero{
+  background-image:linear-gradient(90deg,rgba(247,244,239,.97) 0%,rgba(247,244,239,.91) 62%,rgba(247,244,239,.72) 100%),var(--kd-photo-bhi);
+  background-size:cover;
+  background-position:center;
+}
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work/brain-mosaic/"]) .kd-case-hero,
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work/revaa/"]) .kd-case-hero,
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work/cleargift/"]) .kd-case-hero,
+html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work/arabic-ai-voice-stack/"]) .kd-case-hero{
+  background-image:linear-gradient(90deg,rgba(247,244,239,.98) 0%,rgba(247,244,239,.92) 60%,rgba(247,244,239,.72) 100%),var(--kd-photo-dashboard);
+  background-size:cover;
+  background-position:center;
+}
+
+@media(max-width:980px){
+  .kd-hero{background-position:center,center,62% center}
+  html:has(link[rel="canonical"][href="https://www.kydosdigital.com/work.html"]) .kd-hero{background-position:center,center,62% center}
+  .kd-client-strip > :nth-child(4) img{transform:scale(1.32)}
+}
+@media(max-width:680px){
+  .kd-hero{
+    background-image:
+      linear-gradient(180deg,rgba(7,7,7,.94) 0%,rgba(7,7,7,.86) 72%,rgba(44,0,0,.76) 100%),
+      var(--kd-photo-team);
+    background-size:auto,cover;
+    background-position:center,64% center;
+  }
+  html:has(link[rel="canonical"][href="https://www.kydosdigital.com/services.html"]) .kd-hero,
+  html:has(link[rel="canonical"][href="https://www.kydosdigital.com/analytics-reporting.html"]) .kd-hero,
+  html:has(link[rel="canonical"][href="https://www.kydosdigital.com/crm-automation.html"]) .kd-hero,
+  html:has(link[rel="canonical"][href="https://www.kydosdigital.com/web.html"]) .kd-hero{
+    background-image:linear-gradient(180deg,rgba(7,7,7,.95),rgba(20,0,0,.82)),var(--kd-photo-dashboard);
+  }
+  html:has(link[rel="canonical"][href="https://www.kydosdigital.com/insights.html"]) .kd-hero,
+  html:has(link[rel="canonical"][href="https://www.kydosdigital.com/pricing.html"]) .kd-hero,
+  html:has(link[rel="canonical"][href="https://www.kydosdigital.com/team.html"]) .kd-hero{
+    background-image:linear-gradient(180deg,rgba(7,7,7,.95),rgba(20,0,0,.82)),var(--kd-photo-workspace);
+  }
+  .kd-client-strip > :nth-child(4) img{transform:scale(1.22)}
+  html:has(link[rel="canonical"][href="https://www.kydosdigital.com/"]) .kd-section.dark:has(.kd-eyebrow.light){
+    background-image:linear-gradient(180deg,rgba(8,8,8,.96),rgba(45,0,0,.78)),var(--kd-photo-dashboard);
+  }
+  .kd-case-hero{background-position:70% center!important}
+}
