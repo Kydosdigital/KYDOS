@@ -1,0 +1,61 @@
+name: One-time Luwados tracking install
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/luwados-tracking.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Add tracking script to every HTML page
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          tracking_id = 'tk_60df123a3fa1495d904e1dd3b95375a4'
+          snippet = '''<script
+            src="https://links.luwados.com/js/external-tracking.js"
+            data-tracking-id="tk_60df123a3fa1495d904e1dd3b95375a4">
+          </script>'''
+
+          changed = 0
+          for path in Path('.').rglob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              if tracking_id in text:
+                  continue
+              if '</head>' in text:
+                  text = text.replace('</head>', snippet + '\n</head>', 1)
+              elif '</body>' in text:
+                  text = text.replace('</body>', snippet + '\n</body>', 1)
+              else:
+                  text += '\n' + snippet + '\n'
+              path.write_text(text, encoding='utf-8')
+              changed += 1
+
+          print(f'Updated {changed} HTML files')
+          PY
+
+      - name: Commit site-wide tracking update
+        run: |
+          git config user.name "Kydos Digital"
+          git config user.email "support@kydosdigital.com"
+          git rm .github/workflows/luwados-tracking.yml
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Add Luwados tracking script to all pages"
+          git push origin main
