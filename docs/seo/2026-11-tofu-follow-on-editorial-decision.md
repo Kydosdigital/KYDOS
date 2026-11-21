@@ -1,0 +1,46 @@
+# TOFU follow-on editorial decision, 21 November 2026
+
+**Scope:** Validate three candidate reader questions against forum discussions, live UK Google results, Kydos's connected Search Console, third-party UK keyword estimates and the current `main` sitemap. This document selects one distinct follow-on, but does **not** claim that it has been written, published, indexed or measured.
+
+## What we checked
+
+- [26-thread public question bank](2026-11-greater-manchester-public-forum-question-bank.md), especially F12, F16-F20, F21-F22, F25.
+- Connected GSC domain `sc-domain:kydosdigital.com`, **18 August to 18 November 2026**, Web search, query and page dimensions, filtered separately for `google ads`, `website` and `social media`. These are query-filtered results with privacy limitations, not full demand counts.
+- OpenSEO UK keyword metrics, queried 21 November. `google ads not converting`: 10 estimated searches/month, informational intent, low reported competition, keyword difficulty unavailable. `do i need a website if i have instagram`: no reliable volume or difficulty returned. No metrics returned for the other exact candidate phrases, which is **not zero demand**.
+- UK Google search-result checks on 21 November for `google ads clicks but no leads enquiries UK troubleshooting 2026` and `do i need a website if i have instagram small business UK 2026`, plus current Kydos sitemap (**317 URLs**). SERP results are a sample and change by location and device.
+
+## Decision table
+
+| Question | Evidence of real reader need | Kydos current query exposure | UK SERP / competing content | Existing page collision | Decision |
+|---|---|---|---|---|---|
+| **Why are Google Ads getting clicks but no enquiries?** | UK owner in F16 reports cheaper clicks but fewer customers; F19 asks about unqualified leads; UK estate-agent PPC discussion [r/PPC](https://www.reddit.com/r/PPC/comments/1lo5wtx) describes 179 clicks, six unqualified form conversions, £300/month budget | Existing `google ads` query/page rows are predominantly local buyer terms and niche clinic cost terms, not this direct diagnostic. Example: `aesthetic clinic google ads cost` 30 impressions, position 13.4, zero clicks on a niche article. Do not imply direct query volume. | UK search returns [PPC Ads troubleshooting guide](https://www.ppcads.co.uk/ppc-guide/google-ads-not-generating-leads), [Clarity Digital](https://claritidigital.com/guides/google-ads-not-working/) and a UK owner [Reddit case](https://www.reddit.com/r/PPC/comments/1lo5wtx). Search intent is diagnosis, not selecting an agency. `google ads not converting` 10 UK monthly estimated searches, no difficulty available. | Sitemap contains PPC comparison and pricing pages, e.g. `/blog/ppc-agency-manchester-prices-management-fees-ad-spend.html`, `/blog/google-ads-for-aesthetic-clinics-uk.html`, but no generic paid-clicks-without-enquiries diagnostic URL. | **FIRST FOLLOW-ON: NEW.** Distinct TOFU need, high service relevance, and opportunity for practical tracking/lead-quality checklist. |
+| **Do I need a website if I already have Instagram?** | F12 and F21 ask whether social alone is enough; owners are concerned about expense and channel fit | Current `website` query/page rows are dominated by local web design and agency comparisons, not the direct Instagram question. No relevant volume returned for exact phrase. | Several UK answer-led pages already compete: [Digital Otter](https://www.digitalotter.co.uk/blog/do-you-need-a-website-if-you-have-instagram), [BozApps](https://bozapps.co.uk/insights/do-i-need-a-website-small-business-uk), [Hintling](https://hintlingstudio.co.uk/guides/website-vs-instagram-booking-app/). Need distinct practical decision worksheet, not a copy of their claims. | No exact question URL in sitemap; current web design pages focus on suppliers and location. | **SECOND FOLLOW-ON: CONDITIONAL.** Unique intent, but hold until first follow-on passes QA and article evidence confirms original value. |
+| **Is £100/week enough for Google Ads?** | F17 UK small-business owner asks about £100/week; F18 asks how to allocate a £3,000 budget | GSC `google ads` query rows contain niche and commercial intent, not this specific budget question. No dependable exact UK search-volume estimate returned this check. | Paid-search budget queries blend how-to and price-shopping. No dedicated live SERP check performed for this exact phrase in this run, so this is **not fully SERP validated**. | `/blog/ppc-agency-manchester-prices-management-fees-ad-spend.html` already owns broad PPC cost decisions. | **DEFER / improve existing page first**, unless a later SERP and intent check proves a distinct DIY budget question needs its own page. |
+
+## First follow-on, approved editorial brief
+
+**Working canonical URL:** `https://www.kydosdigital.com/blog/google-ads-clicks-no-enquiries.html`. Verify absent on latest `main` immediately before creating.  
+**Title:** `Google Ads Gets Clicks but No Enquiries? 8 Checks | Kydos`  
+**H1:** `Google Ads Gets Clicks but No Enquiries: What Should You Check First?`  
+**Reader:** Owner of a UK service business paying for Google Ads, especially Greater Manchester trades, local clinics and professional services, who cannot tell if the problem is tracking, search traffic or the landing page.  
+**Funnel:** TOFU diagnostic. **Do not** position as another 'best PPC agencies Manchester' comparison.
+
+**Direct answer (draft direction, subject to factual QA):** A click is not an enquiry. First verify that your form, phone and booking path actually work and that conversions are measured correctly. Then inspect the search terms, location targeting, landing page, offer and follow-up process before increasing spend. If the campaign is new or has little data, be careful not to mistake a small sample for proof of failure.
+
+**Original practical value:** Copyable eight-field worksheet: dates/campaign, spend/clicks, actual enquiries vs recorded conversions, test of contact journey, search-term relevance, geographic fit, landing-page promise, next controlled change and review date. Explicitly distinguish real enquiries, qualified leads, booked appointments and sales. Offer a 'stop spending and fix first' branch when a form is broken or clearly irrelevant traffic is being purchased. Include how to set an affordable experiment cap using actual margins and capacity, with no universal conversion benchmark.
+
+**Suggested H2 sections:** (1) Are enquiries happening but not recorded? (2) Can a visitor actually submit a form or call? (3) Which search terms produced the clicks? (4) Are ads showing to people outside the service area? (5) Does the landing page answer the ad's promise? (6) Are contacts answered quickly enough? (7) Is the sample large enough to judge? (8) What one change should you make and measure next?
+
+**Illustrative scenarios, explicitly fictional:** an Oldham emergency plumber with out-of-area searches; a Stockport clinic with mobile booking friction; a Manchester B2B consultancy with unqualified broad terms. Do not fabricate client outcomes or suggest these examples are actual campaigns.
+
+**Sources to verify and cite on-page:** Google Ads Help on [conversion tracking](https://support.google.com/google-ads/answer/1722022), [search terms](https://support.google.com/google-ads/answer/2472708), [location targeting](https://support.google.com/google-ads/answer/1722043), plus original UK owner discussions in the research bank. Re-check exact Google Help pages and their applicability before publishing. Do not copy forum anecdotes.
+
+**Internal links:** contextual link to `/manchester/ppc-google-ads-agency/` or `/oldham/ppc-google-ads-agency/`, and a relevant practical guide. Do not claim a guaranteed lead cost or use fake performance figures.
+
+**Publication gates:** unique canonical; answer-first text; original diagnostic worksheet; verified official sources; one H1; unique title/meta; valid JSON-LD; working internal links; no noindex; mobile accessibility; existing GTM and GHL/LeadConnector integration intact; reviewed PR; deployment READY. If browser or consented form testing cannot be performed, document as unverified rather than passing full QA.
+
+## Next implementation action
+
+Build the first follow-on HTML from the current site article template and update the blog index and sitemap on a small PR. Perform source, static and browser QA as available, then merge and verify Vercel production. The second article is **not yet approved for publication without its own distinct brief and content review**. Review GSC after indexing and on scheduled +7/+14/+30/+60 checkpoints; early absence of clicks is not failure proof.
+
+**Limitations:** Search Console hides some queries and recent data may be incomplete. Search volume estimates are third-party approximations. No customer leads, actual advertising campaign data or future organic performance are asserted in this decision.
